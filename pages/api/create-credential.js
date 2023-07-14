@@ -6,6 +6,7 @@ const axiosHeaders = {
   },
 };
 
+// basic structure of a credential claim request
 const claimRequest = {
   schema: '',
   claims: ['id'],

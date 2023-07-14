@@ -4,13 +4,27 @@ import { getUnixTime } from 'date-fns/fp';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 
+// Here we're hard-coding a schema
+// you can find sample schemas at https://github.com/iden3/claim-schema-vocab/blob/main/schemas/json
+// or you can create a custom schema using the schema builder: https://certs.dock.io/schemas
+const sampleSchema = {
+  url: 'https://raw.githubusercontent.com/iden3/claim-schema-vocab/main/schemas/json/KYCAgeCredential-v2.json',
+  name: 'KYCAgeCredential',
+  populateFunc(data) {
+      // NOTE: the attributes returned here MUST match the schema
+      return {
+        birthday: getUnixTime(data.subject.dob),
+        documentType: 3324
+      };
+    }
+};
+
 export default function Home() {
   const [issuerName, setIssuerName] = useState();
   const [issuerProfile, setIssuerProfile] = useState();
   const [credentialData, setCredentialData] = useState(
     {
-      // you can find sample schemas at https://github.com/iden3/claim-schema-vocab/blob/main/schemas/json
-      schema: 'https://raw.githubusercontent.com/iden3/claim-schema-vocab/main/schemas/json/KYCAgeCredential-v2.json',
+      schema: sampleSchema.url,
       subject: {}
     });
   const [claimQR, setClaimQR] = useState('');
@@ -24,17 +38,15 @@ export default function Home() {
 
   async function handleCreateCredentialRequest(e) {
     e.preventDefault();
+
     const credential = {
-      schema: credentialData.schema,
+      schema: sampleSchema.url,
       issuer: issuerProfile.did,
-      name: 'KYCAgeCredential',
-      type: ['VerifiableCredential', 'KYCAgeCredential'],
-      subject:
-      {
-        birthday: getUnixTime(credentialData.subject.dob),
-        documentType: 3324
-      }
+      name: sampleSchema.name,
+      type: ['VerifiableCredential', sampleSchema.name],
+      subject: sampleSchema.populateFunc(credentialData)
     };
+
     const { data } = await axios.post('api/create-credential/', credential);
     console.log(data);
     setClaimQR(data.qrUrl);
@@ -79,9 +91,6 @@ export default function Home() {
                 className="p-5"
                 style={{ maxWidth: '500px', margin: '0 auto' }}>
                 <h1 className="text-gray-800 font-bold text-2xl mb-6">Create a Polygon Issuer</h1>
-                <div className="flex items-right">
-                Issuer Name:
-                </div>
                 <div className="flex items-center border-2 mb-8 py-2 px-3 rounded-2xl">
                   <input
                     id="name"
