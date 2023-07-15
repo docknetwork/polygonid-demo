@@ -23,3 +23,6 @@ yarn dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
+## Issuing A Credential: Step by Step
+
+See the [Issuing Quick Start](docs/IssuingQuickStart.md) for details about issuing your first credential on Polygon ID.
