@@ -1,6 +1,6 @@
 # Issuing Credentials: Quick Start
 
-Issuing a Polygon ID verifiable credential via the Dock REST API is fairly straightforward. There are three
+Issuing a Polygon ID verifiable credential via the Dock REST API is fairly straightforward. There are four
 primary steps:
 
 1. Get an API key from Dock Certs
