@@ -93,7 +93,10 @@ They will provide the DID from their Polygon ID wallet when they scan the QR cod
 >
 > In the examples we've hard-coded a specific credential schema (the KYCAgeCredential schema). You can find other sample schemas on the [Iden3 Github repo](https://github.com/iden3/claim-schema-vocab/tree/main/schemas/json). NOTE: make sure you grab the `raw` version of the file.
 >
->Custom schemas are also supported. You can link to a publicly hosted schema directly or you can create a custom schema using the [Templates](https://certs.dock/io/schemas) feature on Dock Certs.
+>Custom schemas are also supported. You can do this three different ways:
+> * link to a publicly hosted schema directly
+> * create a custom schema using the [Templates](https://certs.dock/io/schemas) feature on Dock Certs
+> * use the [Credential Schemas](https://docs.api.dock.io/#credential-schemas) routes in the API
 
 Example axios call:
 ```javascript
