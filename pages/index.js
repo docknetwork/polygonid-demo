@@ -11,12 +11,12 @@ const sampleSchema = {
   url: 'https://raw.githubusercontent.com/iden3/claim-schema-vocab/main/schemas/json/KYCAgeCredential-v2.json',
   name: 'KYCAgeCredential',
   populateFunc(data) {
-      // NOTE: the attributes returned here MUST match the schema
-      return {
-        birthday: getUnixTime(data.subject.dob),
-        documentType: 3324
-      };
-    }
+    // NOTE: the attributes returned here MUST match the schema
+    return {
+      birthday: getUnixTime(data.subject.dob),
+      documentType: 3324
+    };
+  }
 };
 
 export default function Home() {
@@ -31,8 +31,7 @@ export default function Home() {
 
   async function handleGenerateProfileSubmit(e) {
     e.preventDefault();
-    const { data } = await axios.post('api/create-did/', { issuerName });
-    console.log(data);
+    // TODO: Call api
     setIssuerProfile(data);
   }
 
@@ -47,8 +46,7 @@ export default function Home() {
       subject: sampleSchema.populateFunc(credentialData)
     };
 
-    const { data } = await axios.post('api/create-credential/', credential);
-    console.log(data);
+    // TODO: call api
     setClaimQR(data.qrUrl);
   }
 
@@ -171,7 +169,7 @@ export default function Home() {
                         }
                       });
                     }
-                  }
+                    }
                   />
                 </div>
 
@@ -190,53 +188,53 @@ export default function Home() {
     );
   }
 
-    return (
-      <>
-        <div className="flex flex-col-reverse lg:flex-row lg:h-screen">
+  return (
+    <>
+      <div className="flex flex-col-reverse lg:flex-row lg:h-screen">
+        <div
+          className="lg:flex w-full lg:w-1/2 justify-around items-center text-center bg-zinc-900"
+          style={{
+            flexShrink: 0,
+            background: 'url(/bg.jpg)',
+            backgroundRepeat: 'no-repeat',
+            backgroundSize: 'cover',
+          }}>
           <div
-            className="lg:flex w-full lg:w-1/2 justify-around items-center text-center bg-zinc-900"
+            className="w-full mx-auto px-0 py-10 flex-col items-center space-y-6"
             style={{
-              flexShrink: 0,
-              background: 'url(/bg.jpg)',
-              backgroundRepeat: 'no-repeat',
-              backgroundSize: 'cover',
+              maxWidth: '400px',
+              width: '100%',
             }}>
-            <div
-              className="w-full mx-auto px-0 py-10 flex-col items-center space-y-6"
-              style={{
-                maxWidth: '400px',
-                width: '100%',
-              }}>
-              <h1 className="text-white font-bold text-4xl">
-                Share the claim request link
-              </h1>
+            <h1 className="text-white font-bold text-4xl">
+              Share the claim request link
+            </h1>
 
-              <p className="text-white mt-1">
-                Share this link with the recipient. They will be presented with a QR code they can scan to begin the import
-                flow in their Polygon ID wallet.
-              </p>
-              <br />
-              <br />
-            </div>
-          </div>
-          <div
-            className="flex w-full lg:w-1/2 justify-center items-center bg-white space-y-8"
-            style={{ width: '100%' }}>
-            <div className="w-full px-8 md:px-32 lg:px-24">
-              <p className="font-bold text-4xl">
-                Claim URL
-              </p>
-
-              <p>
-                <br />
-                <a href={claimQR} target='_blank' rel="noopener noreferrer">{claimQR}</a>
-              </p>
-              <br />
-              <br />
-            </div>
+            <p className="text-white mt-1">
+              Share this link with the recipient. They will be presented with a QR code they can scan to begin the import
+              flow in their Polygon ID wallet.
+            </p>
+            <br />
+            <br />
           </div>
         </div>
-      </>
+        <div
+          className="flex w-full lg:w-1/2 justify-center items-center bg-white space-y-8"
+          style={{ width: '100%' }}>
+          <div className="w-full px-8 md:px-32 lg:px-24">
+            <p className="font-bold text-4xl">
+              Claim URL
+            </p>
 
-    );
+            <p>
+              <br />
+              <a href={claimQR} target='_blank' rel="noopener noreferrer">{claimQR}</a>
+            </p>
+            <br />
+            <br />
+          </div>
+        </div>
+      </div>
+    </>
+
+  );
 }
