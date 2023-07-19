@@ -113,7 +113,7 @@ Example axios call:
         name: 'KYCAgeCredential',
         type: [ "VerifiableCredential", "KYCAgeCredential" ],
         subject: {
-          birthday: 1687752000,
+          birthday: 20230928,
           documentType: 3324
         }
       },
