@@ -58,7 +58,7 @@ This will return a response that looks like:
   }
 }
 ```
-More details can be found in the [DIDs](https://docs.api.dock.io/#dids) section of the API docs.
+More details can be found in the [DIDs](https://docs.dock.io/developer-documentation/dock-api/dids) section of the API docs.
 
 ### Create a Profile (optional)
 Adding profile details for the DID to the Dock platform is simple and can be added using the `/profiles` route.
@@ -83,7 +83,7 @@ This will return a response that looks like:
   type: "polygonid"
 }
 ```
-More details can be found in the [Profiles](https://docs.api.dock.io/#profiles) section of the API docs.
+More details can be found in the [Profiles](https://docs.dock.io/developer-documentation/dock-api/profiles) section of the API docs.
 
 ## 3. Create a credential claim request
 When issuing a credential we actually set up a claim request because we need to ask the recipient for their DID before we can issue them the credential.
@@ -96,7 +96,7 @@ They will provide the DID from their Polygon ID wallet when they scan the QR cod
 >Custom schemas are also supported. You can do this three different ways:
 > * link to a publicly hosted schema directly
 > * create a custom schema using the [Templates](https://certs.dock/io/schemas) feature on Dock Certs
-> * use the [Credential Schemas](https://docs.api.dock.io/#credential-schemas) routes in the API
+> * use the [Credential Schemas](https://docs.dock.io/developer-documentation/dock-api/credential-schemas) routes in the API
 
 Example axios call:
 ```javascript
@@ -158,7 +158,7 @@ This will return a response that looks like:
   }
 }
 ```
-More details can be found in the [Credentials](https://docs.api.dock.io/#issue-credentials) section of the API docs.
+More details can be found in the [Credentials](https://docs.dock.io/developer-documentation/dock-api/credentials) section of the API docs.
 
 ## 4. Share the claim QR code link with the recipient
 The final step is sharing the QR code link with the recipient. The link can be found in the response body of the request claim call in the previous section in the `qrUrl` attribute.
